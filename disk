@@ -1,0 +1,24 @@
+---
+- name: format disk
+  filesystem:
+      fstype: ext4
+      dev: "{{ NewDisk }}"
+
+- name: create mount path dir
+  file:
+      path: "{{ MountPath }}"
+      state: directory
+
+- name: update /etc/fstab
+  lineinfile:
+      regexp: "^{{ NewDisk }} "
+      dest: /etc/fstab
+      line: "{{ NewDisk }} {{ MountPath }} ext4 defaults 0 0"
+
+- name: load /etc/fstab
+  command: mount -a
+
+- name: check disk mount
+  command: "df -h"
+  register: check_disk
+- debug: var=check_disk.stdout_lines
