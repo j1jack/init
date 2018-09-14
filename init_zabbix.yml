@@ -1,4 +1,5 @@
 ## install zbx agent, centos7
+## ci 1
 - name: push zbx repo file, for centos7
   copy: src=zabbix-release-3.4-2.el7.noarch.rpm dest=/tmp/ force=yes
   when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == "7"
