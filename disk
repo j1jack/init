@@ -22,3 +22,6 @@
   command: "df -h"
   register: check_disk
 - debug: var=check_disk.stdout_lines
+
+- name: just a test
+  command: echo hhd
